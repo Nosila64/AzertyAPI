@@ -10,14 +10,13 @@ router.get("/", function (req,res) {
     console.log("atteint !");
 });
 
-router.get("/Player", function(req,res) {
+router.get("/player", function(req,res) {
     Player.getSignUP(function(err,rows) {
         if(err) {
             res.json({"message":err});
         }
         else {
-            res.json({results:rows});
-            console.log(rows);
+            res.json({"results":rows});
         }
     })
 });
@@ -32,7 +31,7 @@ router.get("/All", function(req,res) {
         }
     })
 });
-router.post("/addPlayer", function(req,res) {
+router.post("/addplayer", function(req,res) {
     Player.addSignUP(req.body,function(err,rows) {
         if(err) {
             res.json({"message":err});
@@ -43,5 +42,25 @@ router.post("/addPlayer", function(req,res) {
         }
     })
 });
-
+router.post("/player", function(req,res) {
+    Player.validPassage(req.body,function(err,rows) {
+        if(err) {
+            res.json({"message":err});
+        }
+        else
+        {
+            res.json({"message":"success"});
+        }
+    })
+});
+router.get("/playerdone", function (req,res) {
+    Player.getPlayerDONE(function (err,rows) {
+        if(err) {
+            res.json({"message":err});
+        }
+        else {
+            res.json({"results":rows})
+        }
+    })
+});
 module.exports=router;
