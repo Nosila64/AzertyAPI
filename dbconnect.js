@@ -5,9 +5,9 @@ var mysql = require('mysql');
 var connection = mysql.createPool({
     connectionLimit : 100,
     host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'azertyliste',
+    user: '[user]',
+    password: '[password]',
+    database: '[database]',
     debug: false
 });
 module.exports=connection;
