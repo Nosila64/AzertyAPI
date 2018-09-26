@@ -34,6 +34,22 @@ var Player = {
         var table = ["player","stateP",1,"hrunP"];
         query = mysql.format(query,table);
         return connection.query(query,callback);
+    },
+    getPlayerDONEByDate:function (date,callback) {
+        var d = new Date(date);
+        var dateMYSQL = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+        var query = "SELECT * FROM ?? WHERE stateP = 1 AND DATE(hrunP)= ? ORDER BY hrunP DESC";
+        var table = ["player", dateMYSQL];
+        query = mysql.format(query,table);
+        console.log(query);
+        return connection.query(query,callback);
+    },
+    getDates:function (callback) {
+        var query = "SELECT DATE(hrunP) as daterun FROM ?? WHERE hrunP is not null GROUP BY DATE(hrunP)";
+        var table = ["player"];
+        query = mysql.format(query,table);
+        return connection.query(query,callback);
+
     }
 };
 module.exports=Player;

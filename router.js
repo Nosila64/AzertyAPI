@@ -63,4 +63,24 @@ router.get("/playerdone", function (req,res) {
         }
     })
 });
+router.get("/listdates", function (req,res) {
+    Player.getDates(function (err,rows) {
+        if(err) {
+            res.json({"message":err});
+        }
+        else {
+            res.json({"results":rows})
+        }
+    })
+});
+router.get("/stats/:date",function (req,res) {
+    Player.getPlayerDONEByDate(req.params.date,function (err,rows) {
+        if(err) {
+            res.json({"message":err});
+        }
+        else {
+            res.json({"results":rows})
+        }
+    })
+});
 module.exports=router;
